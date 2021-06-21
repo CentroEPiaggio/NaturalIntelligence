@@ -32,4 +32,4 @@ Modify .world file in *anymal_c_gazebo/worlds* including other models presents i
 
 World populated with anymal_c urdf and stairs, ramp1, ramp2, manual_crane models
 
-![Image of a random world](randomModels.png)
+![Image of a random world](pics/randomModels.png)

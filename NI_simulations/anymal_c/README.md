@@ -11,8 +11,8 @@
 
 - Dune
 
-![Image of Dune](dune.jpeg)
+![Image of Dune](pics/dune.jpeg)
 
 - Forest
 
-![Image of Forest](forest.jpeg)
+![Image of Forest](pics/forest.jpeg)

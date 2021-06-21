@@ -33,8 +33,8 @@ In a second shell
 
 - Rviz
 
-![Image of Rviz](GoatRvizExample.png)
+![Image of Rviz](pics/GoatRvizExample.png)
 
 - Gazebo
 
-![Image of Gazebo](GoatGazeboExample.png)
+![Image of Gazebo](pics/GoatGazeboExample.png)
