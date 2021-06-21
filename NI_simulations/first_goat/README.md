@@ -13,7 +13,7 @@ To visualize the robot in Rviz
 To spawn the robot in Gazebo
 - ``` $ roslaunch goat_gazebo goat_spawn.launch ```
 
-### How to command the robot
+### How to test a control
 
 Through the plugin manager it is possible to send a theta reference value for each joint. \
 The default demo command, setted in *goat_command/src/give_command.cpp*, is a sinusoidal signal to move the robot base up and down. \
