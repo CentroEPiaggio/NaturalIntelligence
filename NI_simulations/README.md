@@ -38,3 +38,7 @@ ROS package with folders and files useful to spawn the goat_robot in a Gazebo wo
 ### Installing
 
 To install the packages in this repo just clone it into your catkin_ws, make sure to clone also the external dependencies and then `catkin_make`.
+
+### Running 
+
+To run a simulation, launch the .launch file related to the selected environment, more details will be given inside each folder.
