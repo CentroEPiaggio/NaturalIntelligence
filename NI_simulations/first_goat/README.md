@@ -16,7 +16,8 @@ To spawn the robot in Gazebo
 ### How to command the robot
 
 Through the plugin manager it is possible to send a theta reference value for each joint. \
-The default command setted in *goat_command/src/give_command.cpp* is an alternate sinusoidal demo signal to move the robot base up and down.
+The default demo command, setted in *goat_command/src/give_command.cpp*, is an alternate sinusoidal signal to move the robot base up and down. \ 
+It is has been provided just to present a way to control the robot via the plugin manager, for more details about the manager check this [`link`](https://github.com/NMMI/ROS-Gazebo-plugin-qbmove) 
 
 - Copy the whole simulation folder *first_goat* in your catkin_ws/src 
 - ``` $ catkin_make ```
