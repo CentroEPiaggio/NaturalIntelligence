@@ -6,7 +6,7 @@ ROS packages for Natural Intelligence project H2020 simulations.
 
 The main packages are:
 
-##### * anymal_c
+##### anymal_c
 
 Simple ANYmal C urdf version to spawn it in differents world created for the NI environments (dune, forest, grassland)
 
@@ -16,7 +16,7 @@ ROS package with the ANYmal C urdf and related meshes
 - *anymal_c_gazebo* →
 ROS package with the Natural Intelligence wolrds, related models and launch file
 
-##### * first_goat
+##### first_goat
 
 Simple goat robot urdf model to simulate NI Integrator 3
 
