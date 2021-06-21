@@ -1,0 +1,14 @@
+material mountain/floor
+{
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture Mountain_Terrain.png
+			}
+		}
+	}
+}

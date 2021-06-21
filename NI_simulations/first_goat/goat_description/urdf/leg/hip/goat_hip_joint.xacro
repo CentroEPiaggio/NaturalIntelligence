@@ -1,0 +1,64 @@
+<?xml version='1.0'?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+  <xacro:macro name="hip" params="leg">
+
+    <xacro:property name="leg_selection" value="${leg}"/>
+
+    <xacro:if value="${leg_selection == 'RF'}">
+    <joint name="joint_${leg}_hip" type="revolute">
+      <parent link="base_link"/>
+      <child link="${leg}_femur"/>
+      <origin xyz="${base_length/2} ${base_width/2} 0" rpy="0 ${pi/2} 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="30" velocity="1.0" lower="-1" upper="1" />
+    </joint> 
+    </xacro:if>
+
+    <xacro:if value="${leg_selection == 'LF'}">
+    <joint name="joint_${leg}_hip" type="revolute">
+      <parent link="base_link"/>
+      <child link="${leg}_femur"/>
+      <origin xyz="${-base_length/2} ${base_width/2} 0" rpy="0 ${pi/2} 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="30" velocity="1.0" lower="-1" upper="1" />
+    </joint> 
+    </xacro:if>
+
+    <xacro:if value="${leg_selection == 'RH'}">
+    <joint name="joint_${leg}_hip" type="revolute">
+      <parent link="base_link"/>
+      <child link="${leg}_femur"/>
+      <origin xyz="${base_length/2} ${-base_width/2} 0" rpy="0 ${pi/2} 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="30" velocity="1.0" lower="-1" upper="1" />
+    </joint> 
+    </xacro:if>
+
+    <xacro:if value="${leg_selection == 'LH'}">
+    <joint name="joint_${leg}_hip" type="revolute">
+      <parent link="base_link"/>
+      <child link="${leg}_femur"/>
+      <origin xyz="${-base_length/2} ${-base_width/2} 0" rpy="0 ${pi/2} 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="30" velocity="1.0" lower="-1" upper="1" />
+    </joint> 
+    </xacro:if>
+
+  </xacro:macro>
+
+
+  <gazebo>
+      <plugin name="sea_j1" filename="libsea_plugin.so">
+          <joint>joint_${leg}_hip</joint>  
+          <namespace>goat_robot</namespace>
+          <stiffness>${joint_stifness}</stiffness>
+          <pub_eltau>true</pub_eltau>
+          <pub_state>true</pub_state>
+          <sub_ext_tau>true</sub_ext_tau>
+      </plugin>
+  </gazebo>
+    
+</robot>

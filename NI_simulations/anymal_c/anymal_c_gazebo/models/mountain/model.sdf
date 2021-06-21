@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <model name="mountain">
+    <static>true</static>
+    <pose>0 0 0 1.57 0 0</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://mountain/meshes/mountain.obj</uri>
+            <scale>0.018 0.018 0.018</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>2</mu>
+              <mu2>0.01</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://mountain/meshes/mountain.obj</uri>
+            <scale>0.018 0.018 0.018</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://materials/scripts</uri>
+          	<uri>model://materials/textures</uri>
+          	<name>rock/floor</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

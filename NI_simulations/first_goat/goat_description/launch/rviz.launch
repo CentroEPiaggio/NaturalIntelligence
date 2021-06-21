@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find goat_description)/urdf/goat_robot.urdf'" />
+    <param name="use_gui" value="True"/>
+
+    <!-- send fake joint values -->
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui">
+    </node>
+    
+    <!-- Combine joint values -->
+    <node name="robot_state_publisher_custom" pkg="robot_state_publisher" type="robot_state_publisher"/>
+    
+    <!-- Show in Rviz   -->
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find goat_description)/config/first_rviz.rviz"/>
+
+</launch>

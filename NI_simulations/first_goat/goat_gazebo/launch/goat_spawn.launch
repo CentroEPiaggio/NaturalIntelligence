@@ -1,0 +1,36 @@
+<launch>
+
+  <!-- These are the arguments you can pass this launch file -->
+  <arg name="paused" default="true"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find goat_gazebo)/worlds/grassland.world"/>
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+  </include>
+
+  <!-- Load the parameter for the compliant plugin from the configuration file -->
+  <rosparam command="load" file="$(find goat_description)/config/plugin_config.yaml"/>
+  <!-- Uncomment the following line to enable the use of the plugin_manager -->
+  <node pkg="plugin_manager" name="plugin_manager_node" type="plugin_manager_node" output="screen"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find goat_description)/urdf/goat_robot.urdf'" />
+    
+    <arg name="x" default="0"/>
+    <arg name="y" default="0"/>
+    <!-- z value = leg_length + foot_radius (e.g. 0.8 + 0.05 starting case) -->
+    <arg name="z" default="0.85"/>
+    
+    <!-- Spawn the goat robot into Gazebo -->
+    <node name="my_robot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+          args="-urdf -param robot_description -model my_robot -x $(arg x) -y $(arg y) -z $(arg z)" />
+          
+</launch>

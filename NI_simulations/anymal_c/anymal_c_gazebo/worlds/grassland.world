@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    
+    <!-- Global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://plane</uri>
+    </include>
+
+    <population name="stone_population">
+      <model name="stone">
+        <include>
+          <static>false</static>
+          <uri>model://stone</uri>
+        </include>
+      </model>
+      <pose>0 0 0.2 0 0 0</pose>
+      <box>
+        <size>17 17 0.001</size>
+      </box>
+      <model_count>10</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="bush_population">
+      <model name="bush">
+        <include>
+          <static>true</static>
+          <uri>model://bush</uri>
+        </include>
+      </model>
+      <pose>0 0 0 0 0 0</pose>
+      <box>
+        <size>19 19 0.02</size>
+      </box>
+      <model_count>20</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+       
+  </world>
+</sdf>

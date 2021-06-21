@@ -1,0 +1,87 @@
+<?xml version='1.0'?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="base" params="name ">
+
+
+  <link name="${name}">
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+          <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+          <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="${base_mass}"/>
+      <inertia ixx="${base_mass*(base_width*base_width+base_height*base_height)/12}" ixy="0.0" ixz="0.0" iyy="${base_mass*(base_length*base_length+base_height*base_height)/12}" iyz="0.0" izz="${base_mass*(base_length*base_length+base_width*base_width)/12}"/>
+    </inertial>
+
+    <visual>
+      <origin xyz="${base_length/2} ${base_width/2} 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder length="${length_joint}" radius="${radius_joint}" />
+        </geometry>
+    </visual>
+    <collision>
+      <origin xyz="${base_length/2} ${base_width/2} 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder length="${length_joint}" radius="${radius_joint}" />
+        </geometry>
+    </collision>
+
+
+    <visual>
+      <origin xyz="${-base_length/2} ${base_width/2} 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder length="${length_joint}" radius="${radius_joint}" />
+        </geometry>
+    </visual>
+    <collision>
+      <origin xyz="${-base_length/2} ${base_width/2} 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder length="${length_joint}" radius="${radius_joint}" />
+        </geometry>
+    </collision>
+
+
+    <visual>
+      <origin xyz="${base_length/2} ${-base_width/2} 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder length="${length_joint}" radius="${radius_joint}" />
+        </geometry>
+    </visual>
+    <collision>
+      <origin xyz="${base_length/2} ${-base_width/2} 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder length="${length_joint}" radius="${radius_joint}" />
+        </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="${-base_length/2} ${-base_width/2} 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder length="${length_joint}" radius="${radius_joint}" />
+        </geometry>
+    </visual>
+    <collision>
+      <origin xyz="${-base_length/2} ${-base_width/2} 0" rpy="0 ${pi/2} 0" />
+        <geometry>
+          <cylinder length="${length_joint}" radius="${radius_joint}" />
+        </geometry>
+    </collision>
+
+  </link>
+
+
+</xacro:macro>
+</robot>

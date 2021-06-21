@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+  <model name="field">
+    <static>true</static>
+    <pose frame=''>0. 0. 0.002 1.57075 0. 0.</pose>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://floor/meshes/floor.stl</uri>
+            <scale>.001 .001 .001</scale>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://floor/meshes/floor.stl</uri>
+            <scale>.001 .001 .001</scale>
+          </mesh>
+        </geometry>
+      <material>
+          <script>
+            <name>Gazebo/White</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

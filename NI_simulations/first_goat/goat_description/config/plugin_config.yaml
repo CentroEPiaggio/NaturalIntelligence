@@ -1,0 +1,40 @@
+## Namespace of the robot
+namespace: "goat_robot"    
+
+## Time parameters (in seconds)
+T_sample: 0.01       # sample time
+
+## Number of qbAdvance Motors
+joints_number: 8
+
+## Joints name
+joints_name: 
+ - "joint_LF_hip"
+ - "joint_RF_hip"
+ - "joint_LH_hip"
+ - "joint_RH_hip"
+ - "joint_LF_knee"
+ - "joint_RF_knee"
+ - "joint_LH_knee"
+ - "joint_RH_knee"
+
+## topic names to which publish the references
+ref1_topic_name: 
+ - '/theta_command'
+ - '/theta_command'
+ - '/theta_command'
+ - '/theta_command'
+ - '/theta_command'
+ - '/theta_command'
+ - '/theta_command'
+ - '/theta_command'
+
+ref2_topic_name: 
+ - '/'
+ - '/'
+ - '/'
+ - '/'
+ - '/'
+ - '/'
+ - '/'
+ - '/'

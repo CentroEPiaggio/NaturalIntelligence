@@ -1,0 +1,14 @@
+<launch>
+
+    <!-- Load the parameter from the configuration file -->
+    <rosparam command="load" file="$(find goat_command)/config/config_command.yaml"/>
+    
+    <arg name="ns" default="goat_robot"/>
+ <!--    <param name="/use_sim_time" value="true"/> -->
+
+    <!-- Run the measurement node -->
+    <node name="give_goat_command" pkg="goat_command" type="give_command_node" respawn="false"
+          args="0"  output="screen">
+    </node>
+
+</launch>

@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+
+    <!-- Global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <include>
+      <uri>model://stone</uri>
+    </include>
+
+    <include>
+      <uri>model://plane</uri>
+    </include>
+
+    <population name="stone_population">
+      <model name="stone">
+        <include>
+          <static>true</static>
+          <uri>model://big_stone</uri>
+        </include>
+      </model>
+      <pose>0 0 0.8 0 0 0</pose>
+      <box>
+        <size>13 13 0.1</size>
+      </box>
+      <model_count>3</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="pine_population">
+      <model name="pine">
+        <include>
+          <static>true</static>
+          <uri>model://pine_tree</uri>
+        </include>
+      </model>
+      <pose>0 0 0 0 0 0</pose>
+      <box>
+        <size>17 17 0.01</size>
+      </box>
+      <model_count>5</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+
+    <population name="tronco_population">
+      <model name="tronco">
+        <include>
+          <static>true</static>
+          <uri>model://tronco</uri>
+        </include>
+      </model>
+      <pose>0 0 0 0 0 0</pose>
+      <box>
+        <size>17 17 0.001</size>
+      </box>
+      <model_count>5</model_count>
+      <distribution>
+        <type>random</type>
+      </distribution>
+    </population>
+       
+  </world>
+</sdf>

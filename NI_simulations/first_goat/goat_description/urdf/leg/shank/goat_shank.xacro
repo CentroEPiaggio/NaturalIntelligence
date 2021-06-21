@@ -1,0 +1,55 @@
+<?xml version='1.0'?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="shank" params="leg">
+
+    <link name="${leg}_shank">
+
+      <visual>
+        <origin xyz="${leg_length/4} 0 0" rpy="0 ${-pi/2} 0" />
+        <geometry>
+            <cylinder length="${leg_length/2}" radius="${leg_radius}" />
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="${leg_length/4} 0 0" rpy="0 ${-pi/2} 0" />
+        <geometry>
+             <cylinder length="${leg_length/2}" radius="${leg_radius}" />
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="${leg_mass/2}"/>
+        <origin xyz="${leg_length/4} 0 0" rpy="0 ${-pi/2} 0" />
+        <inertia ixx="${leg_mass/2*(3*leg_radius*leg_radius+((leg_length/2)*(leg_length/2)))/12}" ixy="0.0" ixz="0.0" iyy="${leg_mass/2*(3*leg_radius*leg_radius+((leg_length/2)*(leg_length/2)))/12}" iyz="0.0" izz="${leg_mass/2*(leg_radius*leg_radius)/2}"/>
+      </inertial>
+
+      <!-- Foot -->
+      <visual>
+        <origin xyz="${leg_length/2} 0 0" rpy="0 0 0" />
+        <geometry>
+            <sphere radius="${foot_radius}" />
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="${leg_length/2} 0 0" rpy="0 0 0" />
+        <geometry>
+             <sphere radius="${foot_radius}" />
+        </geometry>
+        <surface>
+        <friction>
+          <ode>
+            <mu>2000</mu>
+            <mu2>2000</mu2>
+          </ode>
+        </friction>
+        </surface>
+      </collision>
+
+    </link>
+
+  </xacro:macro>
+</robot>
