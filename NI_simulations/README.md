@@ -33,14 +33,6 @@ ROS package with folders and files useful to spawn the goat_robot in a Gazebo wo
 
 ## Getting Started
 
-### Prerequisites
-
-The above packages are tested on ROS Noetic and their main external dependencies are the following:
-
-* [`NMMI/ROS-Gazebo-plugin-qbmove`](https://github.com/NMMI/ROS-Gazebo-plugin-qbmove)
-
-(Clone this repo in your catkin_ws to use it)
-
 ### Installing
 
 To install the packages in this repo just clone it into your catkin_ws, make sure to clone also the external dependencies and then `catkin_make`.
