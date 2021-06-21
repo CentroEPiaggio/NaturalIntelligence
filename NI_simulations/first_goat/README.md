@@ -2,7 +2,7 @@
 
 This folder includes 4 ROS packages to create and use the first version of a simple goat robot model.
 
-#### To spawn the robot
+### How to spawn the robot
 
 - Copy the whole simulation folder *first_goat* in your catkin_ws/src 
 - ``` $ catkin_make ```
@@ -13,7 +13,7 @@ To visualize the robot in Rviz
 To spawn the robot in Gazebo
 - ``` $ roslaunch goat_gazebo goat_spawn.launch ```
 
-#### To command the robot
+### How to command the robot
 
 Through the plugin manager it is possible to send a theta reference value for each joint.
 The default command setted in *goat_command/src/give_command.cpp* is an alternate sinusoidal demo signal to move the robot base up and down.
