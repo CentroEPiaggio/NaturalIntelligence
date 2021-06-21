@@ -4,7 +4,7 @@ ROS packages for Natural Intelligence project H2020 simulations.
 
 ## Overview
 
-The main packages are:
+The main simulation folders are:
 
 ##### anymal_c
 
