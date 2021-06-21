@@ -21,12 +21,13 @@ It is has been provided just to present a way to control the robot via the plugi
 
 - Copy the whole simulation folder *first_goat* in your catkin_ws/src 
 - ``` $ catkin_make ```
+- 
 In a first shell
 - ``` $ roslaunch goat_gazebo goat_spawn.launch ```
+
 In a second shell
 - ``` $ roslaunch goat_command set_command.launch ```
 
-####
 
 ## Example of robot visualisation
 
