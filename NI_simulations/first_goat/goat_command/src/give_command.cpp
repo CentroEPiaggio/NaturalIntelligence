@@ -9,8 +9,7 @@ using namespace std;
 
 // Variables
 ros::Publisher pub_cmd1;
-ros::Publisher pub_cmd2;
-std_msgs::Float64MultiArray cmd_1, cmd_2;
+std_msgs::Float64MultiArray cmd_1;
 ros::Time init_time, curr_time, prev_time;
 
 // Main fuction
@@ -38,21 +37,17 @@ int main(int argc, char **argv) {
 
     // Initialize or resize variables
     cmd_1.data.resize(n_joints);
-    cmd_2.data.resize(n_joints);
 
     // Initialize command values to zero
     for (int j = 0; j < n_joints; j++)
     {
         cmd_1.data[j] = 0;
-        cmd_2.data[j] = 0;
     }
 
     // Publish the motors' state
     std::string pub1_name = "/" + ns_name + "/reference_1";
-    std::string pub2_name = "/" + ns_name + "/reference_2";
 
     pub_cmd1 = n.advertise<std_msgs::Float64MultiArray>(pub1_name, 500);
-    pub_cmd2 = n.advertise<std_msgs::Float64MultiArray>(pub2_name, 500);
 
     init_time = ros::Time::now();
 
@@ -78,11 +73,9 @@ int main(int argc, char **argv) {
                 {
                 std::cout << "\rSignal started!";
                 cmd_1.data[j] = -sin_amplitude*sin(sin_omega*act_time);
-                cmd_2.data[j] = sin_amplitude*sin(sin_omega*act_time);
                 }
                 else{
                 cmd_1.data[j] = sin_amplitude*sin(sin_omega*act_time);
-                cmd_2.data[j] = sin_amplitude*cos(sin_omega*act_time);
                 }
             }
             // Kill node
@@ -96,8 +89,7 @@ int main(int argc, char **argv) {
 
         // Publish motor states
         pub_cmd1.publish(cmd_1);
-        pub_cmd2.publish(cmd_2);
-
+        
         // Update old values
         prev_time = curr_time;
 
