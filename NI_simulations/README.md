@@ -21,7 +21,7 @@ ROS package with the Natural Intelligence wolrds, related models and launch file
 Simple goat robot urdf model to simulate NI Integrator 3
 
 - *goat_command* →
-ROS package useful to command each goat joint through the [`plugin manager`](https://github.com/Richi90/ROS-Gazebo-plugin-qbmove)
+ROS package useful to command each goat joint through the [`plugin manager`](https://github.com/NMMI/ROS-Gazebo-plugin-qbmove)
 
 - *goat_description* →
 ROS package with the first goat urdf version with the floating base, 8 links and 8 joints
