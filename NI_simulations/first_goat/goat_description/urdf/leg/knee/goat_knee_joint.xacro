@@ -15,7 +15,7 @@
   </xacro:macro>
 
   <gazebo>
-        <plugin name="sea_j1" filename="libsea_plugin.so">
+        <plugin name="${leg}_sea_j2" filename="libsea_plugin.so">
             <joint>joint_${leg}_knee</joint>  
             <namespace>goat_robot</namespace>
             <stiffness>${joint_stifness}</stiffness>
