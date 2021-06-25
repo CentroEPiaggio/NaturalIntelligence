@@ -5,47 +5,29 @@
 
   <xacro:macro name="hip" params="leg">
 
-    <xacro:property name="leg_selection" value="${leg}"/>
+      <xacro:if value="${leg == 'RF'}">
+        <xacro:property name="origin_xyz" value="${base_length/2} ${base_width/2} 0"/>
+      </xacro:if> 
 
-    <xacro:if value="${leg_selection == 'RF'}">
+      <xacro:if value="${leg == 'LF'}">
+        <xacro:property name="origin_xyz" value="${-base_length/2} ${base_width/2} 0"/>
+      </xacro:if> 
+
+      <xacro:if value="${leg == 'RH'}">
+        <xacro:property name="origin_xyz" value="${base_length/2} ${-base_width/2} 0"/>
+      </xacro:if> 
+
+      <xacro:if value="${leg == 'LH'}">
+        <xacro:property name="origin_xyz" value="${-base_length/2} ${-base_width/2} 0"/>
+      </xacro:if> 
+
     <joint name="joint_${leg}_hip" type="revolute">
       <parent link="base_link"/>
       <child link="${leg}_femur"/>
-      <origin xyz="${base_length/2} ${base_width/2} 0" rpy="0 ${pi/2} 0" />
+      <origin xyz="${origin_xyz}" rpy="0 ${pi/2} 0" />
       <axis xyz="0 0 1" />
       <limit effort="30" velocity="1.0" lower="-1" upper="1" />
     </joint> 
-    </xacro:if>
-
-    <xacro:if value="${leg_selection == 'LF'}">
-    <joint name="joint_${leg}_hip" type="revolute">
-      <parent link="base_link"/>
-      <child link="${leg}_femur"/>
-      <origin xyz="${-base_length/2} ${base_width/2} 0" rpy="0 ${pi/2} 0" />
-      <axis xyz="0 0 1" />
-      <limit effort="30" velocity="1.0" lower="-1" upper="1" />
-    </joint> 
-    </xacro:if>
-
-    <xacro:if value="${leg_selection == 'RH'}">
-    <joint name="joint_${leg}_hip" type="revolute">
-      <parent link="base_link"/>
-      <child link="${leg}_femur"/>
-      <origin xyz="${base_length/2} ${-base_width/2} 0" rpy="0 ${pi/2} 0" />
-      <axis xyz="0 0 1" />
-      <limit effort="30" velocity="1.0" lower="-1" upper="1" />
-    </joint> 
-    </xacro:if>
-
-    <xacro:if value="${leg_selection == 'LH'}">
-    <joint name="joint_${leg}_hip" type="revolute">
-      <parent link="base_link"/>
-      <child link="${leg}_femur"/>
-      <origin xyz="${-base_length/2} ${-base_width/2} 0" rpy="0 ${pi/2} 0" />
-      <axis xyz="0 0 1" />
-      <limit effort="30" velocity="1.0" lower="-1" upper="1" />
-    </joint> 
-    </xacro:if>
 
   </xacro:macro>
 
