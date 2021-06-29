@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="femur" params="leg" >
+
+      <link name="${leg}_femur">   
+            <inertial>
+              <origin xyz="0 0 0" rpy="0 0 0"/>
+              <mass value="0.7"/>
+              <inertia ixx="0.001" iyy="0.001" izz="0.001" ixy="0" ixz="0" iyz="0"/>
+            </inertial> 
+            <visual>
+              <origin xyz="0 -0.056 0" rpy="${pi/2} ${-pi/2} 0"/>
+              <geometry>
+                    <mesh filename="package://second_goat_description/meshes/qb_meshes/dae/qb_c_flange_m.dae"/>
+              </geometry> 
+            </visual>
+            <collision>
+              <origin xyz="0 -0.056 0" rpy="${pi/2} ${-pi/2} 0"/>
+              <geometry>
+                  <mesh filename="package://second_goat_description/meshes//qb_meshes/dae/qb_c_flange_m.dae"/>
+              </geometry> 
+            </collision>
+            
+            <visual>
+              <origin xyz="0 -0.089 -0.033" rpy="0 0 ${pi}"/>
+              <geometry>
+                <mesh filename="package://second_goat_description/meshes/qb_meshes/dae/qbmove_frame_m.dae" />
+              </geometry> 
+            </visual>
+            <collision>
+              <origin xyz="0 -0.089 -0.033" rpy="0 0 ${pi}"/>
+              <geometry>
+                <mesh filename="package://second_goat_description/meshes/qb_meshes/dae/qbmove_frame_m.dae" />
+              </geometry> 
+            </collision>
+      </link>
+
+  </xacro:macro>
+</robot>

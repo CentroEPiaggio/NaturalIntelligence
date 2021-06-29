@@ -1,0 +1,28 @@
+<?xml version='1.0'?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="hip_joint" params="leg">
+
+    <joint name="${leg}_hip_joint" type="revolute">
+          <origin xyz="0 0 -0.046" rpy="${pi/2} 0 0"/>
+          <parent link="${leg}_base_link"/>
+          <child link="${leg}_femur"/>
+          <limit effort="30" velocity="1.0" lower="${-pi/2}" upper="${pi/2}" />
+          <axis xyz="0 0 1"/>
+      </joint>
+
+  </xacro:macro>
+
+  <gazebo>
+      <plugin name="${leg}_sea_1" filename="libsea_plugin.so">
+          <joint>${leg}_hip_joint</joint>
+          <namespace>goat_robot</namespace>
+          <stiffness>${joint_stifness}</stiffness>
+          <pub_eltau>false</pub_eltau>                 
+          <pub_state>true</pub_state>                 
+          <sub_ext_tau>false</sub_ext_tau>   
+      </plugin>
+  </gazebo>
+    
+</robot>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Leg components -->
+  <xacro:macro name="leg" params="leg" >
+
+    <!-- Shoulder Fixed -->
+    <xacro:include filename="$(find second_goat_description)/urdf/leg/hip_base/second_goat_hip_base.xacro"/>
+    <xacro:hip_base  leg="${leg}" />
+
+    <!-- Hip Link Fixed -->
+    <xacro:include filename="$(find second_goat_description)/urdf/leg/hip_base_link/second_goat_hip_base_link.xacro"/>
+    <xacro:hip_base_link  leg="${leg}" />
+
+    <!-- Hip Joint -->
+    <xacro:include filename="$(find second_goat_description)/urdf/leg/hip_joint/second_goat_hip_joint.xacro"/>
+    <xacro:hip_joint  leg="${leg}" />
+
+    <!-- Femur Link -->
+    <xacro:include filename="$(find second_goat_description)/urdf/leg/femur/second_goat_femur.xacro"/>
+    <xacro:femur  leg="${leg}"/>
+
+    <!-- Knee Joint -->
+    <xacro:include filename="$(find second_goat_description)/urdf/leg/knee/second_goat_knee_joint.xacro"/>
+    <xacro:knee  leg="${leg}" />
+
+    <!-- Shank Link -->
+    <xacro:include filename="$(find second_goat_description)/urdf/leg/shank/second_goat_shank.xacro"/>
+    <xacro:shank  leg="${leg}" />
+
+  </xacro:macro>
+
+</robot>

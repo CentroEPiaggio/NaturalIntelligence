@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="base" params="name ">
+
+    <!-- <link name="world">
+      </link> 
+        
+      <joint name="dummy_base" type="fixed">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <parent link="world"/>
+            <child link="${name}"/>
+      </joint>  -->
+
+    <link name="${name}">
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="${base_length} ${base_width} ${base_height}"/>
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <box size="${base_length} ${base_width} ${base_height}"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="${base_mass}"/>
+        <inertia ixx="${base_mass*(base_width*base_width+base_height*base_height)/12}" ixy="0.0" ixz="0.0" iyy="${base_mass*(base_length*base_length+base_height*base_height)/12}" iyz="0.0" izz="${base_mass*(base_length*base_length+base_width*base_width)/12}"/>
+      </inertial>
+
+    </link>
+
+    <gazebo reference="${name}">
+        <material>Gazebo/WoodFloor</material>
+    </gazebo> 
+
+  </xacro:macro>
+</robot>
