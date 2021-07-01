@@ -44,7 +44,7 @@ ROS package with the second goat urdf version with the floating base, 8 links an
 - *second_goat_gazebo* →
 ROS package with folders and files useful to spawn the second goat_robot model in a Gazebo world
 
-- *goat_plugin* 
+- *goat_plugin* →
 Same plugin fully explained [here](https://github.com/NMMI/ROS-Gazebo-plugin-qbmove)
 	- *sea_plugin* → ROS package to integrate a Serial Elastic Actuator for each joint
 	- *plugin_manager* → ROS package to easly manage joint control
