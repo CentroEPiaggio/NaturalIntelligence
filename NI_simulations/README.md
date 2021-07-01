@@ -29,10 +29,6 @@ ROS package with the first goat urdf version with the floating base, 8 links and
 - *goat_gazebo* →
 ROS package with folders and files useful to spawn the goat_robot in a Gazebo world
 
-- *goat_plugin* 
-	- *sea_plugin* → ROS package to integrate a Serial Elastic Actuator for each joint
-	- *plugin_manager* → ROS package to easly manage joint control
-
 ##### second_goat
 
 Simulator of a quadrupedal robot modeled with a floating base and 8 qbmove advanced joints/links
@@ -44,10 +40,12 @@ ROS package with the second goat urdf version with the floating base, 8 links an
 - *second_goat_gazebo* →
 ROS package with folders and files useful to spawn the second goat_robot model in a Gazebo world
 
-- *goat_plugin* →
-Same plugin fully explained [here](https://github.com/NMMI/ROS-Gazebo-plugin-qbmove)
-	- *sea_plugin* → ROS package to integrate a Serial Elastic Actuator for each joint
-	- *plugin_manager* → ROS package to easly manage joint control
+##### goat_plugin
+
+Plugin used to implement searial elastic actuator in each model; it is fully explained [here](https://github.com/NMMI/ROS-Gazebo-plugin-qbmove)
+
+- *sea_plugin* → ROS package to integrate a Serial Elastic Actuator for each joint
+- *plugin_manager* → ROS package to easly manage joint control
 
 ## Getting Started
 
