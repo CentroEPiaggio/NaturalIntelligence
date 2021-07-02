@@ -1,6 +1,14 @@
 ## Goat Robot Model
 
-This folder includes 4 ROS packages to create and use the first version of a simple goat robot model.
+This folder includes 3 ROS packages to create and use the first version of a simple goat robot model.
+
+### Prerequisites
+
+The above packages are tested on ROS Noetic and the main external dependency is the following:
+
+* [`goat_plugin`](https://github.com/CentroEPiaggio/NaturalIntelligence/tree/main/NI_simulations/goat_plugin)
+
+Used to integrate the serial elasti actuator in each joint and command the robot via the plugin manager.
 
 ### How to spawn the robot
 
