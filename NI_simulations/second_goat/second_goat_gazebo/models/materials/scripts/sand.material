@@ -1,0 +1,14 @@
+material sand/floor
+{
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture sand.png
+			}
+		}
+	}
+}

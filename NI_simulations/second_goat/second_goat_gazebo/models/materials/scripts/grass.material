@@ -1,0 +1,14 @@
+material grass/floor
+{
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture grass.png
+			}
+		}
+	}
+}

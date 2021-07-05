@@ -1,0 +1,14 @@
+material stone/floor
+{
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture stone.jpg
+			}
+		}
+	}
+}
