@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+
+<!-- Goat Hoof Model, using xacro -->
+
+<robot name="goat_hoof" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Goat hoof Proprieties -->
+  <xacro:property name="base_mass"   value= "0.5"/>
+  <xacro:property name="base_radius"   value= "0.03"/>
+  <xacro:property name="base_length"   value= "0.04"/>
+  <xacro:property name="phalange_mass"   value= "0.2"/>
+  <xacro:property name="phalange_length"   value= "0.06"/>
+  <xacro:property name="phalange_radius"   value= "0.008"/>
+  <xacro:property name="claw_mass"   value= "0.05"/>
+  <xacro:property name="claw_length"   value= "0.06"/>
+  <xacro:property name="claw_width"   value= "0.03"/>
+  <xacro:property name="claw_height"   value= "0.0015"/>
+
+  <!-- Elastic Proprieties -->
+  <xacro:property name="pastern_joint_stifness"   value= "100"/>
+  <xacro:property name="coffin_joint_stifness"   value= "1"/>
+
+  <!-- Base -->
+  <!-- describes base link, the metacarpus, its parameters are editable via xacro proprieties -->
+  <xacro:include filename="$(find goat_hoof_description)/urdf/metacarpus/metacarpus.xacro"/>
+    <xacro:metacarpus name="base_link" />
+
+  <!-- Hoof half parts -->
+  <!-- describes two hoof pats; parameters are editable via xacro proprieties -->
+  <xacro:include filename="$(find goat_hoof_description)/urdf/hoof/hoof.xacro"/>
+
+    <!-- Right Part -->
+    <xacro:hoof side="R" />
+
+    <!-- Left Part --> 
+    <xacro:hoof side="L" /> 
+
+</robot> 

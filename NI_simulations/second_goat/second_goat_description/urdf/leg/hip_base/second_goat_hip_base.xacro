@@ -5,19 +5,19 @@
   <xacro:macro name="hip_base" params="leg">
 
       <xacro:if value="${leg == 'RF'}">
-        <xacro:property name="origin_xyz_hip" value="${base_length/2-0.033} ${base_width/2-0.033} ${-base_height/2}"/>
+        <xacro:property name="origin_xyz_hip" value="${base_body_length/2-0.033} ${base_body_width/2-0.033} ${-base_body_height/2}"/>
       </xacro:if> 
 
       <xacro:if value="${leg == 'LF'}">
-        <xacro:property name="origin_xyz_hip" value="${-base_length/2+0.033} ${base_width/2-0.033} ${-base_height/2}"/>
+        <xacro:property name="origin_xyz_hip" value="${-base_body_length/2+0.033} ${base_body_width/2-0.033} ${-base_body_height/2}"/>
       </xacro:if> 
 
       <xacro:if value="${leg == 'RH'}">
-        <xacro:property name="origin_xyz_hip" value="${base_length/2 -0.033} ${-base_width/2+0.033} ${-base_height/2}"/>
+        <xacro:property name="origin_xyz_hip" value="${base_body_length/2 -0.033} ${-base_body_width/2+0.033} ${-base_body_height/2}"/>
       </xacro:if> 
 
       <xacro:if value="${leg == 'LH'}">
-        <xacro:property name="origin_xyz_hip" value="${-base_length/2+0.033} ${-base_width/2+0.033} ${-base_height/2}"/>
+        <xacro:property name="origin_xyz_hip" value="${-base_body_length/2+0.033} ${-base_body_width/2+0.033} ${-base_body_height/2}"/>
       </xacro:if> 
 
       <joint name="${leg}_base" type="fixed">

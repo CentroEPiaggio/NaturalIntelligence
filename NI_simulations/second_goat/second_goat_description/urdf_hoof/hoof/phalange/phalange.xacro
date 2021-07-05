@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="phalange" params="leg side" >
+
+    <link name="${leg}_${side}_phalange">
+
+      <visual>
+        <origin xyz="0 0 ${-phalange_length/2}" rpy="0 0 0" />
+        <geometry>
+            <cylinder length="${phalange_length}" radius="${phalange_radius}" />
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 ${-phalange_length/2}" rpy="0 0 0" />
+        <geometry>
+             <cylinder length="${phalange_length}" radius="${phalange_radius}" />
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="${phalange_mass}"/>
+        <origin xyz="0 0 ${-phalange_length/2}" rpy="0 0 0" />
+        <inertia ixx="${phalange_mass*(3*phalange_radius*phalange_radius+((phalange_length)*(phalange_length)))/12}" ixy="0.0" ixz="0.0" iyy="${phalange_mass*(3*phalange_radius*phalange_radius+((phalange_length)*(phalange_length)))/12}" iyz="0.0" izz="${phalange_mass*(phalange_radius*phalange_radius)/2}"/>
+      </inertial>
+
+    </link>
+
+  <gazebo reference="${leg}_${side}_phalange">
+        <material>Gazebo/WoodFloor</material>
+  </gazebo> 
+
+  </xacro:macro>
+</robot>

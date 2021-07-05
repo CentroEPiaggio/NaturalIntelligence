@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Leg components -->
+  <xacro:macro name="hoof" params="leg side" >
+
+    <!-- Pastern Joint -->
+    <xacro:include filename="$(find second_goat_description)/urdf_hoof/hoof/pastern_joint/pastern_joint.xacro"/>
+    <xacro:pastern_joint leg="${leg}" side="${side}" />
+
+    <!-- Phalange Link -->
+    <xacro:include filename="$(find second_goat_description)/urdf_hoof/hoof/phalange/phalange.xacro"/>
+    <xacro:phalange leg="${leg}" side="${side}"/>
+
+    <!-- Knee Joint -->
+    <xacro:include filename="$(find second_goat_description)/urdf_hoof/hoof/coffin_joint/coffin_joint.xacro"/>
+    <xacro:coffin_joint leg="${leg}" side="${side}"/>
+
+    <!-- Claw Link -->
+    <xacro:include filename="$(find second_goat_description)/urdf_hoof/hoof/claw/claw.xacro"/>
+    <xacro:claw leg="${leg}" side="${side}" /> 
+
+  </xacro:macro>
+
+
+</robot>

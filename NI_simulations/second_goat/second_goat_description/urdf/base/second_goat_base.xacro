@@ -18,20 +18,20 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-            <box size="${base_length} ${base_width} ${base_height}"/>
+            <box size="${base_body_length} ${base_body_width} ${base_body_height}"/>
         </geometry>
       </visual>
 
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-            <box size="${base_length} ${base_width} ${base_height}"/>
+            <box size="${base_body_length} ${base_body_width} ${base_body_height}"/>
         </geometry>
       </collision>
 
       <inertial>
-        <mass value="${base_mass}"/>
-        <inertia ixx="${base_mass*(base_width*base_width+base_height*base_height)/12}" ixy="0.0" ixz="0.0" iyy="${base_mass*(base_length*base_length+base_height*base_height)/12}" iyz="0.0" izz="${base_mass*(base_length*base_length+base_width*base_width)/12}"/>
+        <mass value="${base_body_mass}"/>
+        <inertia ixx="${base_body_mass*(base_body_width*base_body_width+base_body_height*base_body_height)/12}" ixy="0.0" ixz="0.0" iyy="${base_body_mass*(base_body_length*base_body_length+base_body_height*base_body_height)/12}" iyz="0.0" izz="${base_body_mass*(base_body_length*base_body_length+base_body_width*base_body_width)/12}"/>
       </inertial>
 
     </link>

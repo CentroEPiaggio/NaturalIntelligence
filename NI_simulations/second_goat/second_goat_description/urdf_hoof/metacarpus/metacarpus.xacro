@@ -1,0 +1,45 @@
+<?xml version='1.0'?>
+
+<robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:macro name="metacarpus" params="name leg" >
+
+  <!-- <link name="world">
+  </link>  -->
+    
+  <joint name="shank_to_hoof_${leg}" type="fixed">
+        <origin xyz="0 -0.076 0" rpy="${-pi/2} 0 0"/>
+        <parent link="${leg}_shank"/>
+        <child link="${name}_${leg}"/>
+  </joint>
+
+  <link name="${name}_${leg}">
+  
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <cylinder length="${base_length}" radius="${base_radius}" />
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+             <cylinder length="${base_length}" radius="${base_radius}" />
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="${base_mass}"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="${base_mass*(3*base_radius*base_radius+((base_length/2)*(base_length/2)))/12}" ixy="0.0" ixz="0.0" iyy="${base_mass*(3*base_radius*base_radius+((base_length/2)*(base_length/2)))/12}" iyz="0.0" izz="${base_mass*(base_radius*base_radius)/2}"/>
+      </inertial>
+
+  </link>
+
+  <gazebo reference="${name}_${leg}">
+        <material>Gazebo/WoodFloor</material>
+  </gazebo> 
+
+</xacro:macro>
+</robot>

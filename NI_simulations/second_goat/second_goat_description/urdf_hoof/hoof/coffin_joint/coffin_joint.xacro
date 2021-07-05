@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="coffin_joint" params="leg side" >
+
+  <xacro:if value="${side == 'R'}">
+ <xacro:property name="coffin_lower_limit" value="-0.25"/>
+ <xacro:property name="coffin_upper_limit" value="0.5"/>
+</xacro:if> 
+
+<xacro:if value="${side == 'L'}">
+ <xacro:property name="coffin_lower_limit" value="-0.5"/>
+ <xacro:property name="coffin_upper_limit" value="0.25"/>
+</xacro:if> 
+    
+    <joint name="joint_${side}_coffin_${leg}" type="revolute">
+      <parent link="${leg}_${side}_phalange"/>
+      <child link="${leg}_${side}_claw"/>
+      <origin xyz="0 0 ${-phalange_length}" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="30" velocity="1" lower="${coffin_lower_limit}" upper="${coffin_upper_limit}" />
+      <dynamics damping="0.07" friction="0" /> 
+    </joint> 
+
+    <gazebo reference="joint_${side}_coffin_${leg}">
+  <implicitSpringDamper>True</implicitSpringDamper>
+</gazebo>
+
+  <gazebo>
+        <plugin name="${side}_sea_j2" filename="libsea_plugin.so">
+            <joint>joint_${side}_coffin_${leg}</joint>  
+            <namespace>goat_robot</namespace>
+            <stiffness>${coffin_joint_stifness}</stiffness>
+            <pub_eltau>true</pub_eltau>
+            <pub_state>true</pub_state>
+            <sub_ext_tau>true</sub_ext_tau>
+        </plugin>
+  </gazebo>
+
+  </xacro:macro>
+
+</robot>
