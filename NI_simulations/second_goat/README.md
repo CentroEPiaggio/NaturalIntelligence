@@ -20,4 +20,7 @@ To visualize the robot in Rviz
 
 To spawn the robot in Gazebo
 - ``` $ roslaunch second_goat_gazebo second_goat_spawn.launch ```
-``
+
+Warning: if you want launch a custumized world that uses gazebo world models, before the command above run:
+
+-``` $ export GAZEBO_MODEL_PATH=~/catkin_ws/src/second_goat/second_goat_gazebo/models:$GAZEBO_MODEL_PATH ```
