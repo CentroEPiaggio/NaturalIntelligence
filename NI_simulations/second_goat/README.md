@@ -1,6 +1,6 @@
 ## Second Goat Robot Model
 
-This folder includes 3 ROS packages to create and use the second version of a goat robot model built with 8 *qbmove Advance*
+This folder includes 2 ROS packages to create and use the second version of a goat robot model built with 8 *qbmove Advance*
 
 ### Prerequisites
 
@@ -21,6 +21,6 @@ To visualize the robot in Rviz
 To spawn the robot in Gazebo
 - ``` $ roslaunch second_goat_gazebo second_goat_spawn.launch ```
 
-Warning: if you want launch a custumized world that uses gazebo world models, before the command above run:
+**Warning**: if you want launch a custumized world that uses gazebo world models, before the command above run:
 
 -``` $ export GAZEBO_MODEL_PATH=~/catkin_ws/src/second_goat/second_goat_gazebo/models:$GAZEBO_MODEL_PATH ```
