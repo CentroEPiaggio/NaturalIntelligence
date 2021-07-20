@@ -2,7 +2,7 @@
 
 <robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<xacro:macro name="metacarpus" params="name leg" >
+<xacro:macro name="metacarpus" params="leg" >
 
   <!-- <link name="world">
   </link>  -->
@@ -10,10 +10,10 @@
   <joint name="shank_to_hoof_${leg}" type="fixed">
         <origin xyz="0 -0.076 0" rpy="${-pi/2} 0 0"/>
         <parent link="${leg}_shank"/>
-        <child link="${name}_${leg}"/>
+        <child link="metacarpus_${leg}"/>
   </joint>
 
-  <link name="${name}_${leg}">
+  <link name="metacarpus_${leg}">
   
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -37,7 +37,7 @@
 
   </link>
 
-  <gazebo reference="${name}_${leg}">
+  <gazebo reference="metacarpus_${leg}">
         <material>Gazebo/WoodFloor</material>
   </gazebo> 
 

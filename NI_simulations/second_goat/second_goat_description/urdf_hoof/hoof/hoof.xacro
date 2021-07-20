@@ -5,6 +5,14 @@
   <!-- Leg components -->
   <xacro:macro name="hoof" params="leg side" >
 
+    <!-- Fetlock Joint -->
+    <xacro:include filename="$(find second_goat_description)/urdf_hoof/hoof/fetlock_joint/fetlock_joint.xacro"/>
+    <xacro:fetlock_joint leg="${leg}" side="${side}" />
+
+    <!-- Declaw Link -->
+    <xacro:include filename="$(find second_goat_description)/urdf_hoof/hoof/declaw/declaw.xacro"/>
+    <xacro:declaw leg="${leg}" side="${side}"/>
+
     <!-- Pastern Joint -->
     <xacro:include filename="$(find second_goat_description)/urdf_hoof/hoof/pastern_joint/pastern_joint.xacro"/>
     <xacro:pastern_joint leg="${leg}" side="${side}" />

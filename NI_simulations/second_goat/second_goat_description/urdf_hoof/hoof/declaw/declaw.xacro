@@ -1,0 +1,32 @@
+<?xml version='1.0'?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="declaw" params="leg side" >
+
+    <link name="${leg}_${side}_declaw">
+
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <cylinder length="${declaw_length}" radius="${declaw_radius}" />
+        </geometry>
+      </visual>
+
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+             <cylinder length="${declaw_length}" radius="${declaw_radius}" />
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="${declaw_mass}"/>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="${declaw_mass*(3*declaw_radius*declaw_radius+((declaw_length)*(declaw_length)))/12}" ixy="0.0" ixz="0.0" iyy="${declaw_mass*(3*declaw_radius*declaw_radius+((declaw_length)*(declaw_length)))/12}" iyz="0.0" izz="${declaw_mass*(declaw_radius*declaw_radius)/2}"/>
+      </inertial>
+
+    </link>
+
+  </xacro:macro>
+</robot>

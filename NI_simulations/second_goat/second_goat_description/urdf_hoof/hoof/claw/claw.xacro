@@ -66,55 +66,6 @@
   </link>
 </xacro:if> 
 
-
-  <!-- <link name="${side}_claw">
-
-    <visual>
-      <origin xyz="${claw_origin_xyz}" rpy="0 0 0" />
-      <geometry>
-          <box size="${claw_length} ${claw_width} ${claw_height}"/>
-      </geometry>
-    </visual>
-
-    <collision>
-      <origin xyz="${claw_origin_xyz}" rpy="0 0 0" />
-      <geometry>
-          <box size="${claw_length} ${claw_width} ${claw_height}"/>
-      </geometry>
-    </collision>
-
-    <inertial>
-      <mass value="${claw_mass}"/>
-      <origin xyz="${claw_origin_xyz}" rpy="0 0 0" />
-      <inertia ixx="${claw_mass*(claw_width*claw_width+claw_height*claw_height)/12}" ixy="0.0" ixz="0.0" iyy="${claw_mass*(claw_length*claw_length+claw_height*claw_height)/12}" iyz="0.0" izz="${claw_mass*(claw_length*claw_length+claw_width*claw_width)/12}"/>
-    </inertial>
-
-  </link>  -->
-
-  <!-- <link name="${side}_claw">
-
-    <visual>
-      <origin xyz="0.06 -0.025 0.005" rpy="${-pi/2} 0 ${pi/2}" />
-      <geometry>
-          <mesh filename="${mesh_claw}" scale="0.0015 0.0015 0.0015" />
-      </geometry>
-    </visual>
-
-    <collision>
-      <origin xyz="0.06 -0.025 0.005" rpy="${-pi/2} 0 ${pi/2}" />
-      <geometry>
-          <mesh filename="${mesh_claw}" scale="0.0015 0.0015 0.0015" />
-      </geometry>
-    </collision>
-
-    <inertial>
-      <mass value="${claw_mass}"/>
-      <origin xyz="${claw_origin_xyz}" rpy="0 0 0" />
-      <inertia ixx="${claw_mass*(claw_width*claw_width+claw_height*claw_height)/12}" ixy="0.0" ixz="0.0" iyy="${claw_mass*(claw_length*claw_length+claw_height*claw_height)/12}" iyz="0.0" izz="${claw_mass*(claw_length*claw_length+claw_width*claw_width)/12}"/>
-    </inertial>
-
-  </link> -->
-
 <gazebo reference="${leg}_${side}_claw">
         <material>Gazebo/WoodFloor</material>
   </gazebo> 

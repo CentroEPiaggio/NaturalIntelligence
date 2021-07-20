@@ -17,8 +17,8 @@
   <xacro:property name="claw_height"   value= "0.0015"/>
 
   <!-- Elastic Proprieties -->
-  <xacro:property name="pastern_joint_stifness"   value= "100"/>
-  <xacro:property name="coffin_joint_stifness"   value= "1"/>
+  <xacro:property name="pastern_joint_stifness"   value= "10000"/>
+  <xacro:property name="coffin_joint_stifness"   value= "0.5"/>
 
   <!-- Base -->
   <!-- describes base link, the metacarpus, its parameters are editable via xacro proprieties -->

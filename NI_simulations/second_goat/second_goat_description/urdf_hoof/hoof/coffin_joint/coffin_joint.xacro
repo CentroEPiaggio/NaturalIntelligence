@@ -23,12 +23,12 @@
       <dynamics damping="0.07" friction="0" /> 
     </joint> 
 
-    <gazebo reference="joint_${side}_coffin_${leg}">
+<gazebo reference="joint_${side}_coffin_${leg}">
   <implicitSpringDamper>True</implicitSpringDamper>
 </gazebo>
 
   <gazebo>
-        <plugin name="${side}_sea_j2" filename="libsea_plugin.so">
+        <plugin name="${side}_sea_j5" filename="libsea_plugin.so">
             <joint>joint_${side}_coffin_${leg}</joint>  
             <namespace>goat_robot</namespace>
             <stiffness>${coffin_joint_stifness}</stiffness>

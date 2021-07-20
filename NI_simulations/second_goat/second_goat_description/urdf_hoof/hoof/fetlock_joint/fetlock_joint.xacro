@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+  <xacro:macro name="fetlock_joint" params="leg side">
+
+  <xacro:if value="${side == 'R'}">
+    <xacro:property name="fetlock_origin_xyz" value="0 ${base_radius/2} 0"/>
+  </xacro:if> 
+
+  <xacro:if value="${side == 'L'}">
+    <xacro:property name="fetlock_origin_xyz" value="0 ${-base_radius/2} 0"/>
+  </xacro:if> 
+
+    <joint name="joint_${side}_fetlock_${leg}" type="revolute">
+      <parent link="metacarpus_${leg}"/>
+      <child link="${leg}_${side}_declaw"/>
+      <origin xyz="${fetlock_origin_xyz}" rpy="0 ${pi/2} 0" />
+      <axis xyz="0 0 1" />
+      <limit effort="30" velocity="1.0" lower="-0.04" upper="0.04" />
+      <dynamics damping="0.1" friction="0" />
+    </joint> 
+
+  <gazebo>
+      <plugin name="${side}_sea_j3" filename="libsea_plugin.so">
+          <joint>joint_${side}_fetlock_${leg}</joint>  
+          <namespace>goat_hoof</namespace>
+          <stiffness>${fetlock_joint_stifness}</stiffness>
+          <pub_eltau>true</pub_eltau>
+          <pub_state>true</pub_state>
+          <sub_ext_tau>true</sub_ext_tau>
+      </plugin>
+  </gazebo>  
+
+  </xacro:macro>
+    
+</robot>

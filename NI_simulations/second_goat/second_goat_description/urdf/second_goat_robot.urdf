@@ -1,7 +1,6 @@
 <?xml version='1.0'?>
 
 <!-- Goat Robot Model, using xacro -->
-
 <robot name="goat_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- Goat Proprieties -->
@@ -10,12 +9,15 @@
   <xacro:property name="base_body_width"   value= "0.4"/>
   <xacro:property name="base_body_height"   value= "0.06"/>
   <!-- Goat Elastic Proprieties -->
-  <xacro:property name="joint_stifness"   value= "100"/>
+  <xacro:property name="joint_stifness"   value= "1000"/>
 
   <!-- Hoof Proprieties -->
   <xacro:property name="base_mass"   value= "0.5"/>
   <xacro:property name="base_radius"   value= "0.03"/>
   <xacro:property name="base_length"   value= "0.04"/>
+  <xacro:property name="declaw_mass"   value= "0.1"/>
+  <xacro:property name="declaw_length"   value= "0.02"/>
+  <xacro:property name="declaw_radius"   value= "0.008"/>
   <xacro:property name="phalange_mass"   value= "0.2"/>
   <xacro:property name="phalange_length"   value= "0.06"/>
   <xacro:property name="phalange_radius"   value= "0.008"/>
@@ -24,8 +26,9 @@
   <xacro:property name="claw_width"   value= "0.03"/>
   <xacro:property name="claw_height"   value= "0.0015"/>
   <!-- Hoof Elastic Proprieties -->
+  <xacro:property name="fetlock_joint_stifness"   value= "10"/>
   <xacro:property name="pastern_joint_stifness"   value= "10000"/>
-  <xacro:property name="coffin_joint_stifness"   value= "1"/>
+  <xacro:property name="coffin_joint_stifness"   value= "0.5"/>
 
   <!-- Base -->
   <!-- describes base link, base parameters are editable via xacro proprieties -->
@@ -36,43 +39,34 @@
   <!-- describes four legs, legs parameters are editable via xacro proprieties -->
   <xacro:include filename="$(find second_goat_description)/urdf/leg/second_goat_leg.xacro"/>
 
-  <!-- Right Foreleg -->
-  <xacro:leg leg="RF" />
+  <!-- Left Foreleg -->      <!-- Right Foreleg --> 
+  <xacro:leg leg="LF" />      <xacro:leg leg="RF" />
 
-  <!-- Left Foreleg --> 
-  <xacro:leg leg="LF" />
-
-  <!-- Right Hideleg --> 
-  <xacro:leg leg="RH" />
-
-  <!-- Left Hideleg --> 
-  <xacro:leg leg="LH" /> 
-
+  <!-- Left Hideleg -->      <!-- Right Hideleg --> 
+  <xacro:leg leg="LH" />      <xacro:leg leg="RH" />
 
   <!-- Uncomment this part if you don't want apply the goat hoof -->
 
   <!-- Hoof -->
   <xacro:include filename="$(find second_goat_description)/urdf_hoof/metacarpus/metacarpus.xacro"/>
-  <xacro:metacarpus name="base_link_hoof" leg="RF" /> 
-  <xacro:metacarpus name="base_link_hoof" leg="LF" /> 
-  <xacro:metacarpus name="base_link_hoof" leg="RH" /> 
-  <xacro:metacarpus name="base_link_hoof" leg="LH" /> 
+  <xacro:metacarpus leg="LF" />     <xacro:metacarpus leg="RF" /> 
+  <xacro:metacarpus leg="LH" />     <xacro:metacarpus leg="RH" /> 
 
   <!-- Hoof half parts -->
   <!-- describes two hoof pats; parameters are editable via xacro proprieties -->
   <xacro:include filename="$(find second_goat_description)/urdf_hoof/hoof/hoof.xacro"/>
 
-    <!-- Right Foreleg - Left Part -->        <!-- Right Foreleg - Right Part --> 
-    <xacro:hoof leg="RF" side="L" />           <xacro:hoof leg="RF" side="R" /> 
+  <!-- Right Foreleg - Left Part -->        <!-- Right Foreleg - Right Part --> 
+  <xacro:hoof leg="RF" side="L" />           <xacro:hoof leg="RF" side="R" /> 
 
-    <!-- Left Foreleg - Left Part -->          <!-- Left Foreleg - Right Part -->
-    <xacro:hoof leg="LF" side="L" />           <xacro:hoof leg="LF" side="R" />
+  <!-- Left Foreleg - Left Part -->          <!-- Left Foreleg - Right Part -->
+  <xacro:hoof leg="LF" side="L" />           <xacro:hoof leg="LF" side="R" />
 
-    <!-- Right Hideleg - Left Part -->         <!-- Right Hideleg - Right Part -->
-    <xacro:hoof leg="RH" side="L" />           <xacro:hoof leg="RH" side="R" />
+  <!-- Right Hideleg - Left Part -->         <!-- Right Hideleg - Right Part -->
+  <xacro:hoof leg="RH" side="L" />           <xacro:hoof leg="RH" side="R" />
 
-    <!-- Left Hideleg - Left Part -->          <!-- Left Hideleg - Right Part -->
-    <xacro:hoof leg="LH" side="L" />           <xacro:hoof leg="LH" side="R" />
+  <!-- Left Hideleg - Left Part -->          <!-- Left Hideleg - Right Part -->
+  <xacro:hoof leg="LH" side="L" />           <xacro:hoof leg="LH" side="R" />
 
 
 </robot> 
