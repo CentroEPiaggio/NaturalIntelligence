@@ -47,6 +47,17 @@ Plugin used to implement searial elastic actuator in each model; it is fully exp
 - *sea_plugin* → ROS package to integrate a Serial Elastic Actuator for each joint
 - *plugin_manager* → ROS package to easly manage joint control
 
+##### softfeet
+
+This repository contains all the required packages for using the SoftFoot for NI EU project (repo originally started on THING EU project).
+
+
+- *softfoot_thing* → metapackage
+- *softfoot_thing_description* → foot meshes, xacros and urdf
+- *softfoot_thing_gazebo* → simulation plugin
+- *softfoot_thing_visualization* → real time visualization using imus
+
+
 ## Getting Started
 
 ### Installing
