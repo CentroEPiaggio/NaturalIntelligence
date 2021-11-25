@@ -1,0 +1,307 @@
+<?xml version="1.0"?>
+<robot name="softfoot_thing" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Properties -->
+    <xacro:property name="const_pi" value="3.1415926535897931"/>
+    <xacro:property name="ankle_mass" value="0.0181"/>
+    <xacro:property name="arch_mass" value="0.0256"/>
+    <xacro:property name="roll_mass" value="0.0177"/>
+    <xacro:property name="velocity" value="100" />
+    <xacro:property name="effort" value="100" />
+
+    <xacro:property name="max_stiffness" value="10"/>
+    <xacro:property name="min_stiffness" value="0"/>
+    <xacro:property name="rate_stiffness" value="20"/>
+
+    <!-- Gazebo and Transmission -->
+    <xacro:include filename="$(find softfoot_thing_description)/model/softfoot_thing.gazebo.xacro"/>
+    <xacro:include filename="$(find softfoot_thing_description)/model/softfoot_thing.transmission.xacro"/>
+
+    <!-- Utilities -->
+    <xacro:include filename="$(find softfoot_thing_description)/model/chain_thing.urdf.xacro"/>
+    <xacro:include filename="$(find softfoot_thing_description)/model/softfoot_thing_inertia.xacro"/>
+    <xacro:include filename="$(find softfoot_thing_description)/model/softfoot_thing_materials.xacro"/>
+
+    <!-- URDF -->
+    <xacro:macro name="softfoot_thing" params="parent name *origin">
+
+        <!-- 0) Ankle base - fixed to parent. -->
+        <joint name="${parent}_${name}_ankle_base_joint" type="fixed">
+            <xacro:insert_block name="origin"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <parent link="${parent}"/>
+            <child link="${name}_ankle_base_link"/>
+        </joint>
+
+        <link name="${name}_ankle_base_link">
+            <inertial>
+                <xacro:insert_block name="really_negligible_inertia"/>
+            </inertial>
+        </link>
+
+        <!-- 1) Ankle of the foot - fixed to parent. -->
+        <joint name="${name}_ankle_joint" type="fixed">
+            <origin xyz="0 0 -0.022" rpy="0 0 0"/>
+            <parent link="${name}_ankle_base_link"/>
+            <child link="${name}_ankle_link"/>
+        </joint>
+
+        <link name="${name}_ankle_link">
+            <inertial>
+                <mass value="${ankle_mass}"/>
+                <origin xyz="0 0 0.0154" rpy="0 0 0"/>
+                <xacro:ankle_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/ankle.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftFoot/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/ankle.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 2) Front arch - joint along y-axis to pitch -->
+        <joint name="${name}_front_arch_joint" type="revolute">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <axis xyz="0 1 0"/>
+            <limit lower="${-30 * const_pi / 180}" upper="${30* const_pi / 180}" effort="${effort}" velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${name}_ankle_link"/>
+            <child link="${name}_front_arch_link"/>
+        </joint>
+
+        <link name="${name}_front_arch_link">
+            <inertial>
+                <mass value="${arch_mass}"/>
+                <origin xyz="0.0356 -0.0011 -0.0078" rpy="0 0 0"/>
+                <xacro:front_arch_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/front_arch_front.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftFoot/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/front_arch_front.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 2) Front arch - stiffness -->
+        <!-- <joint name="${name}_front_arch_joint_stiffness" type="revolute">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="${min_stiffness}" upper="${max_stiffness}" effort="0" velocity="${rate_stiffness}" />
+    <safety_controller soft_lower_limit="${min_stiffness}" soft_upper_limit="${max_stiffness}" k_position="10" k_velocity="10"/>
+    <parent link="${name}_ankle_link"/>
+    <child link="${name}_front_arch_dummy"/>
+</joint>
+
+<link name="${name}_front_arch_dummy"/> -->
+
+        <!-- 3) Back arch - joint along y-axis to pitch -->
+        <joint name="${name}_back_arch_joint" type="revolute">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <axis xyz="0 -1 0"/>
+            <limit lower="${-30 * const_pi / 180}" upper="${30 * const_pi / 180}" effort="${effort}" velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${name}_ankle_link"/>
+            <child link="${name}_back_arch_link"/>
+        </joint>
+
+        <link name="${name}_back_arch_link">
+            <inertial>
+                <mass value="${arch_mass}"/>
+                <origin xyz="-0.0356 0.0011 -0.0078" rpy="0 0 0"/>
+                <xacro:back_arch_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/front_arch_back.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftFoot/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/front_arch_back.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 3) Back arch - stiffness -->
+        <!-- <joint name="${name}_back_arch_joint_stiffness" type="revolute">
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="${min_stiffness}" upper="${max_stiffness}" effort="0" velocity="${rate_stiffness}" />
+    <safety_controller soft_lower_limit="${min_stiffness}" soft_upper_limit="${max_stiffness}" k_position="10" k_velocity="10"/>
+    <parent link="${name}_ankle_link"/>
+    <child link="${name}_back_arch_dummy"/>
+</joint>
+
+<link name="${name}_back_arch_dummy"/> -->
+
+        <!-- x) Roll driving joint - we suppose the roll joints move specularly -->
+        <joint name="${name}_roll_joint" type="revolute">
+            <origin xyz="0.058 0 -0.028" rpy="0 -0.1047 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}" velocity="${velocity}"/>
+            <dynamics friction="0.01" damping="0.01"/>
+            <parent link="${name}_front_arch_link"/>
+            <child link="${name}_roll_link"/>
+        </joint>
+
+        <link name="${name}_roll_link">
+            <inertial>
+                <xacro:insert_block name="really_negligible_inertia"/>
+            </inertial>
+        </link>
+
+        <!-- 4) Front roll - joint along x-axis to roll -->
+        <joint name="${name}_front_roll_joint" type="revolute">
+            <origin xyz="0.058 0 -0.028" rpy="0 -0.1047 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}" velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <mimic joint="${name}_roll_joint" multiplier="1"/>
+            <parent link="${name}_front_arch_link"/>
+            <child link="${name}_front_roll_link"/>
+        </joint>
+
+        <link name="${name}_front_roll_link">
+            <inertial>
+                <mass value="${roll_mass}"/>
+                <origin xyz="0.0010 0 -0.0112" rpy="0 0 0"/>
+                <xacro:roll_link_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/roll_link_v04.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftFoot/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/roll_link_v04.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 4) Front roll - stiffness -->
+        <!-- <joint name="${name}_front_roll_joint_stiffness" type="revolute">
+                <origin xyz="0.058 0 -0.028" rpy="0 -0.1047 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="${min_stiffness}" upper="${max_stiffness}" effort="0" velocity="${rate_stiffness}" />
+    <mimic joint="${name}_roll_joint" multiplier="1"/>
+    <safety_controller soft_lower_limit="${min_stiffness}" soft_upper_limit="${max_stiffness}" k_position="10" k_velocity="10"/>
+    <parent link="${name}_front_arch_link"/>
+    <child link="${name}_front_roll_dummy"/>
+</joint>
+
+<link name="${name}_front_roll_dummy"/> -->
+
+        <!-- 4) Back roll - joint along x-axis to roll -->
+        <joint name="${name}_back_roll_joint" type="revolute">
+            <origin xyz="-0.058 0 -0.028" rpy="0 -0.1047 ${const_pi}"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}" velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <mimic joint="${name}_roll_joint" multiplier="-1"/>
+            <parent link="${name}_back_arch_link"/>
+            <child link="${name}_back_roll_link"/>
+        </joint>
+
+        <link name="${name}_back_roll_link">
+            <inertial>
+                <mass value="${roll_mass}"/>
+                <origin xyz="0.0010 0 -0.0112" rpy="0 0 0"/>
+                <xacro:roll_link_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/roll_link_v04.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftFoot/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/roll_link_v04.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 4) Back roll - stiffness -->
+        <!-- <joint name="${name}_back_roll_joint_stiffness" type="revolute">
+                <origin xyz="-0.058 0 -0.028" rpy="0 -0.1047 ${const_pi}"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="${min_stiffness}" upper="${max_stiffness}" effort="0" velocity="${rate_stiffness}" />
+    <mimic joint="${name}_roll_joint" multiplier="-1"/>
+    <safety_controller soft_lower_limit="${min_stiffness}" soft_upper_limit="${max_stiffness}" k_position="10" k_velocity="10"/>
+    <parent link="${name}_back_arch_link"/>
+    <child link="${name}_back_roll_dummy"/>
+</joint>
+
+<link name="${name}_back_roll_dummy"/> -->
+
+        <!-- 5) Middle chain insertion point -->
+        <joint name="${name}_middle_chain_insertion_joint" type="fixed">
+            <origin xyz="-0.00209969 0 -0.0118454" rpy="${-(const_pi / 2) - 0.105} 0 ${-const_pi / 2}"/>
+            <parent link="${name}_back_roll_link"/>
+            <child link="${name}_middle_chain_insertion_link"/>
+        </joint>
+
+        <link name="${name}_middle_chain_insertion_link">
+            <inertial>
+                <xacro:insert_block name="really_negligible_inertia"/>
+            </inertial>
+        </link>
+
+        <!-- 6) Middle chain - starting from front -->
+        <xacro:chain_thing name="middle_chain" foot="${name}" parent="${name}_front_roll_link">
+            <origin xyz="-0.00209969 0 -0.0118454" rpy="${-(const_pi / 2) + 0.1046328} 0 ${const_pi / 2}"/>
+        </xacro:chain_thing>
+
+        <!-- 7) Right chain - starting from front -->
+        <xacro:chain_thing name="right_chain" foot="${name}" parent="${name}_front_roll_link">
+            <origin xyz="-0.00209969 -0.0191500 -0.0118454" rpy="${-(const_pi / 2) + 0.1046328} 0 ${const_pi / 2}"/>
+        </xacro:chain_thing>
+
+        <!-- 8) Left chain - starting from front -->
+        <xacro:chain_thing name="left_chain" foot="${name}" parent="${name}_front_roll_link">
+            <origin xyz="-0.00209969 0.0191500 -0.0118454" rpy="${-(const_pi / 2) + 0.1046328} 0 ${const_pi / 2}"/>
+        </xacro:chain_thing>
+
+        <!-- Gazebo elements -->
+        <xacro:softfoot_thing_gazebo name="${name}" left_chain_name="left_chain" middle_chain_name="middle_chain"
+                                     right_chain_name="right_chain"/>
+        <xacro:softfoot_thing_transmission name="${name}"/>
+
+    </xacro:macro>
+
+</robot>

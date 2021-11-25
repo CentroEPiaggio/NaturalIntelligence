@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+
+<!-- THIS FILE LAUNCHES FOUR SOFTFEET IN GAZEBO -->
+
+<launch>
+
+<!-- LAUNCH ARGUMENTS -->
+<arg name="floating" default="true"/>
+<arg name="model1" default="$(find softfoot_thing_description)/robot/four_floating_feet.urdf.xacro"/>
+<arg name="model2" default="$(find softfoot_thing_description)/robot/four_softfeet.urdf.xacro"/>
+
+<!-- START LAUNCH -->
+
+<!-- Robot description -->
+<group if="$(arg floating)">
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model1)"/>
+</group>
+<group unless="$(arg floating)">
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model2)"/>
+</group>
+
+<!-- Load Gazebo simulation environment -->
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="true"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="verbose" value="false"/>
+    <arg name="debug" value="false"/>
+</include>
+
+<!-- Spawn the full robot into Gazebo  -->
+<group if="$(arg floating)">
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -z 2 -model $(arg model1) -param robot_description -unpause"/>
+</group>
+<group unless="$(arg floating)">
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model $(arg model2) -param robot_description -unpause"/>
+</group>
+
+</launch>

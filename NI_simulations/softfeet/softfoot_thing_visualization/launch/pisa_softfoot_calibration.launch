@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+
+<!-- THIS FILE LAUNCHES THE PISA SOFTFOOT CALIBRATION (LAUNCH ONLY AFTER HAVING LAUNCHED BASE) -->
+
+<launch>
+    
+    <!-- LAUNCH ARGUMENTS -->
+
+    <!-- START LAUNCH -->
+
+    <!-- Joints Calibrator -->
+    <node name="js_calibrator" pkg="softfoot_thing_visualization" type="softfoot_thing_visualization_calibration" required="true" output="screen"/>
+
+</launch>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="negligible_mass" value="0.1"/>
+    <xacro:property name="really_negligible_mass" value="0.00001"/>
+    <xacro:property name="mm2tom2" value="0.000001"/>
+
+    <!-- INERTIA MATRICES FOR LINKS (wrt frames in urdf inertial) -->
+
+    <!-- Ankle -->
+    <xacro:macro name="ankle_inertia">
+        <inertia ixx="${mm2tom2 * 4.4972}" iyy="${mm2tom2 * 1.8785}" izz="${mm2tom2 * 1.0468}"
+                 ixy="${mm2tom2 * -0.0012}" ixz="${mm2tom2 * -0.0027}" iyz="${mm2tom2 * 0.0005}"/>
+    </xacro:macro>
+
+    <!-- Front arch -->
+    <xacro:macro name="front_arch_inertia">
+        <inertia ixx="${mm2tom2 * 3.1301}" iyy="${mm2tom2 * 12.3897}" izz="${mm2tom2 * 11.8654}"
+                 ixy="${mm2tom2 * -0.3627}" ixz="${mm2tom2 * 3.6816}" iyz="${mm2tom2 * 0.1283}"/>
+    </xacro:macro>
+
+    <!-- Back arch -->
+    <xacro:macro name="back_arch_inertia">
+        <inertia ixx="${mm2tom2 * 3.1301}" iyy="${mm2tom2 * 12.3897}" izz="${mm2tom2 * 11.8654}"
+                 ixy="${mm2tom2 * -0.3627}" ixz="${mm2tom2 * -3.6816}" iyz="${mm2tom2 * -0.1283}"/>
+    </xacro:macro>
+
+    <!-- Roll link -->
+    <xacro:macro name="roll_link_inertia">
+        <inertia ixx="${mm2tom2 * 3.6156}" iyy="${mm2tom2 * 0.9073}" izz="${mm2tom2 * 3.2659}"
+                 ixy="${mm2tom2 * 0.0000}" ixz="${mm2tom2 * -0.1588}" iyz="${mm2tom2 * 0.0000}"/>
+    </xacro:macro>
+
+    <!-- Simple cuboid -->
+    <xacro:macro name="cuboid_inertia_def" params="width height length mass">
+        <inertia ixx="${mass * (height * height + length * length) / 12}"
+                 iyy="${mass * (width * width + length * length) / 12}"
+                 izz="${mass * (width * width + height * height) / 12}"
+                 ixy="0" iyz="0" ixz="0"/>
+    </xacro:macro>
+
+    <!-- Simple cylinder -->
+    <xacro:macro name="cylinder_inertia_def" params="radius length mass">
+        <inertia ixx="${mass * (3 * radius * radius + length * length) / 12}"
+                 iyy="${mass * radius* radius / 2}"
+                 izz="${mass * (3 * radius * radius + length * length) / 12}"
+                 ixy="0" iyz="0" ixz="0"/>
+    </xacro:macro>
+
+    <!-- Negligible inertia for simulation -->
+    <xacro:property name="negligible_inertia">
+        <origin xyz="0 0 0"/>
+        <mass value="${negligible_mass}"/>
+        <inertia ixx="${mm2tom2 * 0.0001}" iyy="${mm2tom2 * 0.0001}" izz="${mm2tom2 * 0.0001}"
+                 ixy="0.0" ixz="0.0" iyz="0.0"/>
+    </xacro:property>
+
+    <xacro:property name="really_negligible_inertia">
+        <origin xyz="0 0 0"/>
+        <mass value="${really_negligible_mass}"/>
+        <inertia ixx="${mm2tom2 * 0.00001}" iyy="${mm2tom2 * 0.00001}" izz="${mm2tom2 * 0.00001}"
+                 ixy="0.0" ixz="0.0" iyz="0.0"/>
+    </xacro:property>
+
+</robot>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>softfoot_thing</name>
+  <version>1.0.0</version>
+  <description>The softfoot_thing package</description>
+
+  <author email="mathewjose.pollayil@phd.unipi.it">Mathew Jose Pollayil</author>
+  <maintainer email="georgejose.pollayil@phd.unipi.it">George Jose Pollayil</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <exec_depend>softfoot_thing_description</exec_depend>
+  <exec_depend>softfoot_thing_gazebo</exec_depend>
+  <exec_depend>softfoot_thing_visualization</exec_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>

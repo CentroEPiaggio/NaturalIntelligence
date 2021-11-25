@@ -1,0 +1,51 @@
+﻿VOLUME =  2.0227866e+03  MM^3
+AREA DI SUPERFICIE =  2.5584870e+03  MM^2
+DENSITÀ MEDIA =  7.7042570e-06 CHILOGRAMMO / MM^3
+MASSA =  1.5584068e-02 CHILOGRAMMO 
+
+BARICENTRO rispetto a sistema di coordinate SYS_CHAIN_OUTER:
+X   Y   Z -6.3499999e+00  3.2237082e-01 -3.8893029e+00  MM
+
+INERZIA rispetto a sistema di coordinate SYS_CHAIN_OUTER:  (CHILOGRAMMO * MM^2)
+
+TENSORE DI INERZIA:
+Ixx Ixy Ixz  1.0951726e+00  3.1901393e-02 -3.8488109e-01
+Iyx Iyy Iyz  3.1901393e-02  1.7868908e+00  3.6230405e-02
+Izx Izy Izz -3.8488109e-01  3.6230405e-02  1.4768554e+00
+
+INERZIA al BARICENTRO rispetto a sistema di coordinate SYS_CHAIN_OUTER:  (CHILOGRAMMO * MM^2)
+
+TENSORE DI INERZIA:
+Ixx Ixy Ixz  8.5781787e-01  0.0000000e+00  0.0000000e+00
+Iyx Iyy Iyz  0.0000000e+00  9.2276706e-01  1.6691136e-02
+Izx Izy Izz  0.0000000e+00  1.6691136e-02  8.4684731e-01
+
+MOMENTI PRINCIPALI DI INERZIA:  (CHILOGRAMMO * MM^2)
+I1  I2  I3   8.4333977e-01  8.5781787e-01  9.2627459e-01
+
+MATRICE di ROTAZIONE da orientamento SYS_CHAIN_OUTER agli ASSI PRINCIPALI:
+       0.00001        1.00000        0.00000
+      -0.20565        0.00000        0.97863
+       0.97863       -0.00001        0.20565
+
+ANGOLI DI ROTAZIONE da orientamento SYS_CHAIN_OUTER agli ASSI PRINCIPALI (gradi):
+angoli attorno a x  y  z -78.132          0.000        -89.999 
+
+RAGGI DI ROTAZIONE rispetto a ASSI PRINCIPALI:
+R1  R2  R3 7.3563244e+00  7.4192008e+00  7.7095576e+00  MM
+
+---------------------------------------------
+
+PROPRIETÀ DI MASSA DI COMPONENTI DI ASSIEME
+(in unità di assieme a il sistema di coordinate SYS_CHAIN_OUTER)
+
+   DENSITÀ             MASSA          C.G.:  X        Y         Z
+
+                  OUTER_LINK_ATT           MATERIALE:              METAL_STEEL_HIGH_CARBON
+         7.48000e-06  7.78194e-03 -6.35000e+00  6.45578e-01 -2.71135e+00
+                       PIN_CHAIN           MATERIALE:              METAL_STEEL_HIGH_CARBON
+         7.48000e-06  1.97770e-03  0.00000e+00  0.00000e+00  0.00000e+00
+                       PIN_CHAIN           MATERIALE:              METAL_STEEL_HIGH_CARBON
+         7.48000e-06  1.97770e-03 -1.27000e+01  7.77651e-16  0.00000e+00
+                      RICHCOTB-4           MATERIALE:                          METAL_BRASS
+         8.48000e-06  3.84673e-03 -6.35000e+00  1.64672e-15 -1.02715e+01

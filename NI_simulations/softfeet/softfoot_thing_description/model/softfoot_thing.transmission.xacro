@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+	<xacro:property name="Interface" value="EffortJointInterface"/>
+
+	<xacro:macro name="softfoot_thing_transmission" params="name">
+
+		<!-- No transmission are needed yet. -->
+
+	</xacro:macro>
+
+</robot>

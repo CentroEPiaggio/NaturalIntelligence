@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<!-- THIS FILE RECORDS AND SAVES BAG FILES OF SPECIFIC TOPICS TO SPECIFIED LOCATION -->
+
+<launch>
+    
+    <!-- LAUNCH ARGUMENTS -->
+    <arg name="topics" default="/qb_class_imu/acc /qb_class_imu/gyro"/>
+    <arg name="path" default="/home/mathew/Desktop/"/>
+
+    <!-- START LAUNCH -->
+
+    <!-- Bag record -->
+    <node pkg="rosbag" type="record" args="-o $(arg path) $(arg topics)" name="record" output="screen"/>
+    
+
+</launch>

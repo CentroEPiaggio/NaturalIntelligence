@@ -1,0 +1,25 @@
+# Controllers for the SoftFeet
+
+# Anterior left foot
+softfoot_1:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100 
+  
+# Anterior right foot
+softfoot_2:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100 
+
+# Posterior left foot
+softfoot_3:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100 
+
+# Posterior right foot
+softfoot_4:
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100 

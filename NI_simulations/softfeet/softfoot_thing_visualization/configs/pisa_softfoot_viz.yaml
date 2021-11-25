@@ -1,0 +1,49 @@
+# Parameters for SoftFoot Visualization
+# Remember that there might be other important constants that can only be changed from the src code.
+
+softfoot_viz:
+
+  # Calibrate online
+  calibrate_online: false
+
+  # Filter measurments
+  use_filter: true
+
+  # Fuse integrated gyro measurments
+  use_gyro: true
+
+  # Publish leg pose
+  publish_leg_pose: true
+
+  # Names of the joints of the softfoot
+  joint_names: ["front_arch_joint", "back_arch_joint", "roll_joint"]
+  # Names of the frames of the joints to get axes
+  joint_frame_names: ["front_arch_link", "back_arch_link", "roll_link"]
+
+  # Connected feet (should be also in the urdf)
+  connected_feet_name: "softfoot"
+  connected_feet_ids: [1, 2, 3, 4]
+
+  # Anterior left foot
+  softfoot_1:
+    joint_pairs: [[0, 1], [0, 3], [1, 2]]
+  
+  # Anterior right foot
+  softfoot_2:
+    joint_pairs: [[0, 1], [0, 3], [1, 2]]
+
+  # Posterior left foot
+  softfoot_3:
+    joint_pairs: [[0, 1], [0, 3], [1, 2]]
+
+  # Posterior right foot
+  softfoot_4:
+    joint_pairs: [[0, 1], [0, 3], [1, 2]]
+
+  # Low pass filter
+  low_pass_filter:
+    - name: first_low_pass
+      type: filters/TransferFunctionFilterDouble
+      params:
+        a: [1.0, -0.90]
+        b: [0.05, 0.05]

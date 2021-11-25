@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+
+<!-- THIS FILE LAUNCHES A FLOATING SOFTFOOT IN GAZEBO -->
+
+<launch>
+
+<!-- LAUNCH ARGUMENTS -->
+<arg name="model" default="$(find softfoot_thing_description)/robot/vertical_softfoot.urdf.xacro"/>
+
+<!-- START LAUNCH -->
+
+<!-- Robot description -->
+<param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+
+<!-- Load Gazebo simulation environment -->
+<include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="true"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="verbose" value="false"/>
+    <arg name="debug" value="false"/>
+</include>
+
+<!-- Spawn the full robot into Gazebo  -->
+<node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen" args="-urdf -model $(arg model) -param robot_description -unpause"/>
+
+</launch>

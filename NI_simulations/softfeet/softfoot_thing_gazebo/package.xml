@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package>
+  <name>softfoot_thing_gazebo</name>
+  <version>1.0.0</version>
+  <description>The softfoot_thing_gazebo contains plugins to properly simulate the feet.</description>
+
+  <author email="mathewjose.pollayil@phd.unipi.it">Mathew Jose Pollayil</author>
+  <maintainer email="georgejose.pollayil@phd.unipi.it">George Jose Pollayil</maintainer>
+ 
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>roslib</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>gazebo_ros</run_depend>
+  <run_depend>gazebo</run_depend>
+  
+  <export>
+    <gazebo_ros plugin_path="${prefix}/lib" gazebo_media_path="${prefix}"/>
+  </export>
+</package>

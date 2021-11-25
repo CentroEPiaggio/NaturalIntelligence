@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="negligible_mass" value="0.1"/>
+  <xacro:property name="mm2tom2" value="0.000001"/>
+
+  <!-- INERTIA MATRICES FOR CHAIN LINKS (wrt frames in urdf inertial) -->
+
+  <!-- Inner Chain link -->
+  <xacro:macro name="inner_chain_inertia">
+    <inertia ixx="${mm2tom2 * 0.2123}" iyy="${mm2tom2 * 0.4544}" izz="${mm2tom2 * 0.5212}"
+             ixy="${mm2tom2 * 0.0000}" ixz="${mm2tom2 * 0.0000}" iyz="${mm2tom2 * 0.0000}"/>
+  </xacro:macro>
+
+  <!-- Outer Chain link -->
+  <xacro:macro name="outer_chain_inertia">
+    <inertia ixx="${mm2tom2 * 1.0952}" iyy="${mm2tom2 * 1.7869}" izz="${mm2tom2 * 1.4768}"
+             ixy="${mm2tom2 * 0.0000}" ixz="${mm2tom2 * 0.0000}" iyz="${mm2tom2 * 0.0000}"/>
+  </xacro:macro>
+
+</robot>

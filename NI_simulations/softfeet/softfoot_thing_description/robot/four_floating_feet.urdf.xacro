@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding='utf-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="pisa_softfoot">
+
+<!-- ARGS -->
+<xacro:property name="leg_mass" value="0.02"/>
+
+<!-- MODELS -->
+<xacro:include filename="$(find softfoot_thing_description)/model/softfoot_thing.urdf.xacro"/>
+
+<!-- WORLD -->
+<link name="world">
+</link>
+
+<!-- LEG 1 -->
+<joint name="world_to_leg1" type="floating">
+    <origin xyz="0 0 0.5" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="leg_link1"/>
+</joint>
+
+<link name="leg_link1">
+    <inertial>
+        <mass value="${leg_mass}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia    ixx="${mm2tom2 * 1}" iyy="${mm2tom2 * 1}" izz="${mm2tom2 * 1}"
+                    ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.1" radius="0.015"/>
+        </geometry>
+        <material name="SoftFoot/Black"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.1" radius="0.015"/>
+        </geometry>
+    </collision>
+</link>
+
+<gazebo reference="leg_link1">
+    <gravity>true</gravity>
+    <material>Gazebo/Black</material>
+</gazebo>
+
+<!-- FOOT 1 -->
+<xacro:softfoot_thing name="softfoot1" parent="leg_link1">
+    <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+</xacro:softfoot_thing>
+
+<!-- LEG 2 -->
+<joint name="world_to_leg2" type="floating">
+    <origin xyz="0 -0.2 0.5" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="leg_link2"/>
+</joint>
+
+<link name="leg_link2">
+    <inertial>
+        <mass value="${leg_mass}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia    ixx="${mm2tom2 * 1}" iyy="${mm2tom2 * 1}" izz="${mm2tom2 * 1}"
+                    ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.1" radius="0.015"/>
+        </geometry>
+        <material name="SoftFoot/Black"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.1" radius="0.015"/>
+        </geometry>
+    </collision>
+</link>
+
+<gazebo reference="leg_link2">
+    <gravity>true</gravity>
+    <material>Gazebo/Black</material>
+</gazebo>
+
+<!-- FOOT 2 -->
+<xacro:softfoot_thing name="softfoot2" parent="leg_link2">
+    <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+</xacro:softfoot_thing>
+
+<!-- LEG 3 -->
+<joint name="world_to_leg3" type="floating">
+    <origin xyz="-0.4 0 0.5" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="leg_link3"/>
+</joint>
+
+<link name="leg_link3">
+    <inertial>
+        <mass value="${leg_mass}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia    ixx="${mm2tom2 * 1}" iyy="${mm2tom2 * 1}" izz="${mm2tom2 * 1}"
+                    ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.1" radius="0.015"/>
+        </geometry>
+        <material name="SoftFoot/Black"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.1" radius="0.015"/>
+        </geometry>
+    </collision>
+</link>
+
+<gazebo reference="leg_link3">
+    <gravity>true</gravity>
+    <material>Gazebo/Black</material>
+</gazebo>
+
+<!-- FOOT 3 -->
+<xacro:softfoot_thing name="softfoot3" parent="leg_link3">
+    <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+</xacro:softfoot_thing>
+
+<!-- LEG 4 -->
+<joint name="world_to_leg4" type="floating">
+    <origin xyz="-0.4 -0.2 0.5" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="leg_link4"/>
+</joint>
+
+<link name="leg_link4">
+    <inertial>
+        <mass value="${leg_mass}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia    ixx="${mm2tom2 * 1}" iyy="${mm2tom2 * 1}" izz="${mm2tom2 * 1}"
+                    ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+    <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.1" radius="0.015"/>
+        </geometry>
+        <material name="SoftFoot/Black"/>
+    </visual>
+    <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+            <cylinder length="0.1" radius="0.015"/>
+        </geometry>
+    </collision>
+</link>
+
+<gazebo reference="leg_link4">
+    <gravity>true</gravity>
+    <material>Gazebo/Black</material>
+</gazebo>
+
+<!-- FOOT 4 -->
+<xacro:softfoot_thing name="softfoot4" parent="leg_link4">
+    <origin xyz="0 0 -0.05" rpy="0 0 0"/>
+</xacro:softfoot_thing>
+
+</robot>

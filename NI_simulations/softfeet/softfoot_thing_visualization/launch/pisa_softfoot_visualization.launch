@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+
+<!-- THIS FILE LAUNCHES THE PISA SOFTFOOT VISUALIZATION ON RVIZ -->
+
+<launch>
+    
+    <!-- LAUNCH ARGUMENTS -->
+    <arg name="gui" default="false"/>
+    <arg name="new_qb" default="true"/>
+    <arg name="model" default="$(find softfoot_thing_description)/robot/pisa_softfoot.urdf.xacro"/>
+    <arg name="rvizconfig" default="$(find softfoot_thing_visualization)/configs/pisa_softfoot.rviz"/>
+    <arg name="footconfig" default="$(find softfoot_thing_visualization)/configs/pisa_softfoot_viz.yaml"/>
+    <arg name="foot1calib" default="$(find softfoot_thing_visualization)/configs/softfoot_1.yaml"/>
+    <arg name="foot2calib" default="$(find softfoot_thing_visualization)/configs/softfoot_2.yaml"/>
+    <arg name="foot3calib" default="$(find softfoot_thing_visualization)/configs/softfoot_3.yaml"/>
+    <arg name="foot4calib" default="$(find softfoot_thing_visualization)/configs/softfoot_4.yaml"/>
+
+    <!-- START LAUNCH -->
+
+    <!-- Robot description -->
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+
+    <!-- Joint state and robot state publishers of the full robot description -->
+    <group if="$(arg gui)">
+        <param name="use_gui" value="$(arg gui)"/>
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+    </group>
+    <group unless="$(arg gui)">
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+            <rosparam param="source_list">[/softfoot_1/joint_states, /softfoot_2/joint_states, /softfoot_3/joint_states, /softfoot_4/joint_states]</rosparam>
+        </node>
+    </group>
+    
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher"/>
+
+    <!-- QB Interface -->
+    <group unless="$(arg gui)">
+        <group unless="$(arg new_qb)">
+<!--            <include file="$(find qb_interface)/launch/qb_interface_imu_5_boards.launch"></include>-->
+        </group>
+        <group if="$(arg new_qb)">
+<!--            <include file="$(find nmmi_examples)/launch/SoftFoot_5_IMU_boards_chain.launch"></include>-->
+        </group>
+    </group>
+
+    <!-- Loading viz config file to param server -->
+	<rosparam command="load" file="$(arg footconfig)"/>
+
+    <!-- Loading calibration config files for feet to param server -->
+    <rosparam command="load" file="$(arg foot1calib)"/>
+    <rosparam command="load" file="$(arg foot2calib)"/>
+    <rosparam command="load" file="$(arg foot3calib)"/>
+    <rosparam command="load" file="$(arg foot4calib)"/>
+
+    <!-- Joints Estimator -->
+    <group unless="$(arg gui)">
+        <node name="js_estimator" pkg="softfoot_thing_visualization" type="softfoot_thing_visualization_joints_estimator" required="true" output="screen"/>
+    </group>
+
+    <!-- RViz for visualization -->
+    <node name="softfoot_rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true"/>
+
+</launch>

@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Properties -->
+    <xacro:property name="const_pi" value="3.1415926535897931"/>
+    <xacro:property name="inner_chain_mass" value="0.0082"/>
+    <xacro:property name="outer_chain_mass" value="0.0156"/>
+    <xacro:property name="velocity" value="100"/>
+    <xacro:property name="effort" value="100"/>
+
+    <!-- Utilities -->
+    <xacro:include filename="$(find softfoot_thing_description)/model/chain_thing_inertia.xacro"/>
+    <xacro:include filename="$(find softfoot_thing_description)/model/chain_thing_materials.xacro"/>
+
+    <!-- URDF -->
+    <xacro:macro name="chain_thing" params="parent name foot *origin">
+
+        <!-- TODO: Rotation axes now around x, it might be better to change meshes to revolute around y -->
+
+        <!-- 0) Chain 1 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_1_joint" type="revolute">
+            <xacro:insert_block name="origin"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${parent}"/>
+            <child link="${foot}_${name}_1_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_1_link">
+            <inertial>
+                <mass value="${inner_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:inner_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 1) Chain 2 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_2_joint" type="revolute">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${foot}_${name}_1_link"/>
+            <child link="${foot}_${name}_2_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_2_link">
+            <inertial>
+                <mass value="${outer_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:outer_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/outer_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/outer_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 2) Chain 3 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_3_joint" type="revolute">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${foot}_${name}_2_link"/>
+            <child link="${foot}_${name}_3_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_3_link">
+            <inertial>
+                <mass value="${inner_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:inner_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 3) Chain 4 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_4_joint" type="revolute">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${foot}_${name}_3_link"/>
+            <child link="${foot}_${name}_4_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_4_link">
+            <inertial>
+                <mass value="${outer_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:outer_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/outer_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/outer_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 4) Chain 5 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_5_joint" type="revolute">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${foot}_${name}_4_link"/>
+            <child link="${foot}_${name}_5_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_5_link">
+            <inertial>
+                <mass value="${inner_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:inner_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 5) Chain 6 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_6_joint" type="revolute">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${foot}_${name}_5_link"/>
+            <child link="${foot}_${name}_6_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_6_link">
+            <inertial>
+                <mass value="${outer_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:outer_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/outer_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/outer_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 6) Chain 7 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_7_joint" type="revolute">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${foot}_${name}_6_link"/>
+            <child link="${foot}_${name}_7_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_7_link">
+            <inertial>
+                <mass value="${inner_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:inner_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 7) Chain 8 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_8_joint" type="revolute">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${foot}_${name}_7_link"/>
+            <child link="${foot}_${name}_8_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_8_link">
+            <inertial>
+                <mass value="${outer_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:outer_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/outer_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/outer_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 8) Chain 9 - joint along y-axis to pitch -->
+        <joint name="${foot}_${name}_9_joint" type="revolute">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <axis xyz="1 0 0"/>
+            <limit lower="${-45 * const_pi / 180}" upper="${45 * const_pi / 180}" effort="${effort}"
+                   velocity="${velocity}"/>
+            <dynamics friction="0.0001" damping="0.0001"/>
+            <parent link="${foot}_${name}_8_link"/>
+            <child link="${foot}_${name}_9_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_9_link">
+            <inertial>
+                <mass value="${inner_chain_mass}"/>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <xacro:inner_chain_inertia/>
+            </inertial>
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/visual/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+                <material name="SoftChain/Grey"/>
+            </visual>
+            <collision>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <mesh filename="package://softfoot_thing_description/meshes/collision/inner_chain.stl"
+                          scale=" .001 .001 .001"/>
+                </geometry>
+            </collision>
+        </link>
+
+        <!-- 9) Chain Tip - fixed joint -->
+        <joint name="${foot}_${name}_tip_joint" type="fixed">
+            <origin xyz="0 0 0.0127" rpy="0 0 0"/>
+            <parent link="${foot}_${name}_9_link"/>
+            <child link="${foot}_${name}_tip_link"/>
+        </joint>
+
+        <link name="${foot}_${name}_tip_link">
+            <inertial>
+                <xacro:insert_block name="really_negligible_inertia"/>
+            </inertial>
+        </link>
+
+    </xacro:macro>
+
+</robot>
